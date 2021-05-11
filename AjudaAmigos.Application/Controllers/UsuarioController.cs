@@ -50,6 +50,7 @@ namespace AjudaAmigos.Application.Controllers
         /// </returns>
         [HttpGet]
         [MapToApiVersion("2")]
+        [AllowAnonymous]
         public IActionResult ObterTodosV2()
         {
             return Executar(() => _baseUsuarioService.ObterTodos());
