@@ -11,5 +11,6 @@ namespace AjudaAmigos.Domain.Entities
         public string Login { get; set; }
 
         public string Senha { get; set; }
+        public string Tipo { get; set; }
     }
 }
