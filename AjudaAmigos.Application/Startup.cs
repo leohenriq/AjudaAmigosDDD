@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using AjudaAmigos.Service.Services;
 
 namespace AjudaAmigos.Application
 {
@@ -48,12 +49,13 @@ namespace AjudaAmigos.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowFromAll",
                     builder => builder
-                    .WithMethods("GET", "POST")
+                    .WithMethods("GET", "POST", "PUT", "DELETE")
                     .AllowAnyOrigin()
                     .AllowAnyHeader());
             });
@@ -131,6 +133,8 @@ namespace AjudaAmigos.Application
         /// <param name="provider">The API version descriptor provider used to enumerate defined API versions.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
+
+            app.UseCors("AllowFromAll");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
