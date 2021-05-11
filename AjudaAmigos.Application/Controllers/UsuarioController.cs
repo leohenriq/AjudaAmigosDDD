@@ -1,6 +1,7 @@
 ﻿using AjudaAmigos.Domain.Entities;
 using AjudaAmigos.Domain.Interfaces;
 using AjudaAmigos.Service.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -36,6 +37,7 @@ namespace AjudaAmigos.Application.Controllers
         /// </returns>
         [HttpGet]
         [MapToApiVersion("1")]
+        [Authorize(Roles = "ADM")]
         public IActionResult ObterTodosV1()
         {
             return Executar(() => _baseUsuarioService.ObterTodos());
